@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>H2H CHALLENGE - Crickbait</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&amp;family=Lexend:wght@600&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#0a0e1a",
+                      "on-primary-container": "#582200",
+                      "background": "#0f131f",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "on-primary-fixed-variant": "#783200",
+                      "surface-container-high": "#262a37",
+                      "primary-fixed": "#ffdbca",
+                      "on-secondary": "#402d00",
+                      "primary-fixed-dim": "#ffb690",
+                      "error": "#ffb4ab",
+                      "outline": "#a78b7d",
+                      "on-error": "#690005",
+                      "secondary-container": "#e3aa00",
+                      "surface-bright": "#353946",
+                      "primary": "#ffb690",
+                      "surface-container-low": "#171b28",
+                      "on-primary-fixed": "#341100",
+                      "on-background": "#dfe2f3",
+                      "inverse-surface": "#dfe2f3",
+                      "tertiary-fixed": "#6bff8f",
+                      "tertiary": "#4ae176",
+                      "outline-variant": "#584237",
+                      "secondary": "#ffc640",
+                      "tertiary-container": "#00b251",
+                      "inverse-primary": "#9d4300",
+                      "on-secondary-container": "#5a4100",
+                      "error-container": "#93000a",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "surface-container": "#1b1f2c",
+                      "surface-dim": "#0f131f",
+                      "secondary-fixed": "#ffdf9f",
+                      "on-tertiary-fixed": "#002109",
+                      "on-tertiary-container": "#003b16",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#dfe2f3",
+                      "on-tertiary": "#003915",
+                      "on-surface-variant": "#e0c0b1",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "secondary-fixed-dim": "#f9bd22",
+                      "surface-variant": "#313442",
+                      "surface-container-highest": "#313442",
+                      "on-primary": "#552100",
+                      "inverse-on-surface": "#2c303d",
+                      "on-secondary-fixed": "#261a00",
+                      "surface": "#0f131f",
+                      "primary-container": "#f97316",
+                      "surface-tint": "#ffb690"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "2rem",
+                      "margin-desktop": "2.5rem",
+                      "sm": "0.5rem",
+                      "margin-mobile": "1rem",
+                      "xs": "0.25rem",
+                      "md": "1rem",
+                      "lg": "1.5rem",
+                      "gutter": "1rem",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "data-mono": ["Space Grotesk"],
+                      "score-massive": ["Inter"],
+                      "body-main": ["Inter"],
+                      "display-header": ["Inter"],
+                      "team-name": ["Inter"],
+                      "label-caps": ["Lexend"]
+              },
+              "fontSize": {
+                      "data-mono": ["14px", {"lineHeight": "1", "fontWeight": "700"}],
+                      "score-massive": ["32px", {"lineHeight": "1", "fontWeight": "800"}],
+                      "body-main": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display-header": ["24px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "900"}],
+                      "team-name": ["20px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pitch-line {
+            background-image: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            height: 1px;
+            width: 100%;
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest text-on-surface font-body-main min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-4 h-16 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
+<div class="flex items-center gap-3">
+<button class="active:scale-95 duration-150 text-orange-500">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-sans uppercase tracking-tighter font-black text-xl text-white italic tracking-widest">H2H CHALLENGE</h1>
+</div>
+<button class="active:scale-95 duration-150 text-slate-400 hover:text-orange-400 transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="pt-20 px-margin-mobile max-w-2xl mx-auto space-y-8">
+<!-- Hero Section: Select Opponent -->
+<section class="relative overflow-hidden rounded-xl p-6 bg-surface-container border border-white/5 shadow-2xl">
+<div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary-container/20 rounded-full blur-3xl"></div>
+<h2 class="font-display-header text-display-header mb-4 text-white uppercase">Select an Opponent</h2>
+<div class="space-y-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary-container" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg py-3 pl-10 pr-4 text-sm font-data-mono focus:ring-1 focus:ring-primary-container focus:border-primary-container transition-all outline-none" placeholder="Search by name or username..." type="text"/>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl" data-icon="group_add">group_add</span>
+<span class="font-label-caps text-label-caps">FIND FRIENDS</span>
+</button>
+</div>
+</section>
+<!-- Active Challenges -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-[0.2em]">Active Challenges</h3>
+<span class="bg-tertiary-container/20 text-tertiary text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1 border border-tertiary/30">
+<span class="w-1.5 h-1.5 bg-tertiary rounded-full animate-pulse"></span> LIVE
+                </span>
+</div>
+<div class="space-y-3">
+<!-- Card 1 -->
+<div class="glass-card rounded-xl p-4 border-l-4 border-l-primary-container shadow-[0_0_15px_rgba(249,115,22,0.15)] relative overflow-hidden group">
+<div class="pitch-line absolute bottom-0 left-0"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="w-10 h-10 rounded-full border border-primary-container/50 object-cover" data-alt="close-up portrait of a young man with a confident expression, dramatic lighting against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7idPK83ezUKTIQZ0AkXXelSAa53fyk26czvOecz3V4mRRd7Wl9w37ycl_Enm91wpVFatZfWVrZJlRxuAPbF3J0HncGJQlVEzKC8qSwfvlaUzHpQSCpMVLGmolamSwm8XoAwBro3rD1WIcAQRCnDE9vd8RbXT_2vq-6Kj5pJ60LbD1e7DWBN7hcTnbd5FTZC3pbLuzR7I4nKpCr-cJOejvmdvDPSU1bGtSIJmo0LNSMVoJ-mOggjjgfQm6QyalNw03WCunQOO4dyyb"/>
+<div class="absolute -bottom-1 -right-1 bg-primary-container text-[8px] font-black p-0.5 rounded-sm">YOU</div>
+</div>
+<span class="font-data-mono text-white text-lg">vs.</span>
+<div class="relative">
+<img class="w-10 h-10 rounded-full border border-white/20 object-cover" data-alt="portrait of a man with stubble smiling, warm golden hour lighting, urban setting in soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJJ9jwOWIms9V7TtUtjVIMxFOs7BxPr-YiUg-PLorTGuGxjvgLyPF44cHAobrX8ZvBak-KZ-eWUvzgnRiCWnCfLNwVn2FOXKbfMYf9QAlexeSzOFwQxtuZv6CfWZJuZNxw-jUTdq4nVOmBXWuHwzyrzG7UWvDmeGoz-7KvNfE1-F83iqnQN_C0jPyLgkPNQFS2bw2KYiU1Ey30JbsDjlnWbMIzYuDJj-hG1r6y5kZFM7SCkYvOsIIRnKiGW1Qo7xL4k03wDf00R8Yl"/>
+<div class="absolute -bottom-1 -right-1 bg-slate-700 text-[8px] font-black p-0.5 rounded-sm text-white">RAHUL</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-slate-500">STAKES</p>
+<p class="font-data-mono text-primary text-xl">50 PTS</p>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low p-2 rounded-lg border border-white/5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="sports_cricket">sports_cricket</span>
+<span class="font-label-caps text-[11px] text-white">CSK vs MI</span>
+</div>
+<span class="font-label-caps text-[10px] text-slate-400">Match in 2h 15m</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-xl p-4 border-l-4 border-l-slate-700 relative overflow-hidden group">
+<div class="pitch-line absolute bottom-0 left-0 opacity-50"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-primary-container/30 bg-surface-container-high flex items-center justify-center font-black text-primary">Y</div>
+<span class="font-data-mono text-white text-lg">vs.</span>
+<div class="relative">
+<img class="w-10 h-10 rounded-full border border-white/20 object-cover" data-alt="portrait of a professional woman with a friendly smile, clean studio lighting with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl0Xl0KXmZFvrNYQTDOTLCw7gQ44_krnj2HdghWulLrMXaH_IAsz72W5p6w9gSR6mXGH3jfo-BSKeWrHWDmpYtpF3sfb9tVX80JJNSwVRxu-mfFY27GY7ReZMIpcTud88f1QiyHN7Ypdz2U_dcW3KVVbBokgjxAjv9o6nS5Dzp-FnekIX7rp7XF9UUbdjtV-86l0H7VOTtltBvwFPBiqE-oh3_AB3OyJFxOb5kbunMjBbsd8BojXkNWtMJFZTXqgQBp03xcuZOTobr"/>
+<div class="absolute -bottom-1 -right-1 bg-slate-700 text-[8px] font-black p-0.5 rounded-sm text-white">SNEHA</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-slate-500">STAKES</p>
+<p class="font-data-mono text-white/80 text-xl">120 PTS</p>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low p-2 rounded-lg border border-white/5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-sm" data-icon="sports_cricket">sports_cricket</span>
+<span class="font-label-caps text-[11px] text-white">RCB vs KKR</span>
+</div>
+<span class="font-label-caps text-[10px] text-tertiary">LIVE NOW</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed Comparison -->
+<section class="space-y-4">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-[0.2em]">Rivalry Insight</h3>
+<div class="bg-surface-container rounded-xl p-6 border border-white/5 relative overflow-hidden">
+<div class="flex items-center justify-between mb-8">
+<div class="text-center space-y-2">
+<div class="w-12 h-12 rounded-full border-2 border-primary-container mx-auto flex items-center justify-center font-bold text-white bg-primary-container/10">YOU</div>
+<p class="font-label-caps text-[10px] text-slate-400">WIN RATE</p>
+<p class="font-data-mono text-white text-lg">68%</p>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="h-10 w-[1px] bg-white/10"></div>
+<span class="font-data-mono text-orange-500 italic text-xl">VS</span>
+<div class="h-10 w-[1px] bg-white/10"></div>
+</div>
+<div class="text-center space-y-2">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 mx-auto overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="headshot of Rahul, athletic build, outdoor lighting, blurred stadium background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3B-g96fGFbD5V76fwf8g_F7dLwDqVzMcXx0zNMEvEKJD5EpVhKa1RHlZTbBFp66GL4fkOhUc7k4cshQrO1VvepV1ss_mR0sZb5KmORAYNB-z-ZosDpuUnS04JuD0jGZ6aBOzLuK_m_G_J8dwBhD_M1j1jgWWyWU3Z00-XidoF2IQx-E3iFqZCVRDvModZ_wshauB6-XNGAmwhB94Lkndq2if6at1mwwGtP_87Yr0gT0hAowWHeNUOQFkwrr40mf-CHu8yL-xUMCQi"/>
+</div>
+<p class="font-label-caps text-[10px] text-slate-400">WIN RATE</p>
+<p class="font-data-mono text-white text-lg">62%</p>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between font-label-caps text-[10px] text-slate-400 mb-1">
+<span>PREDICTION ACCURACY</span>
+<span class="text-primary-container">+6% Advantage</span>
+</div>
+<div class="h-2 bg-slate-900 rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container" style="width: 68%"></div>
+<div class="h-full bg-slate-700" style="width: 32%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-3 rounded-lg border border-white/5">
+<p class="font-label-caps text-[10px] text-slate-500 mb-1">BEST CATEGORY</p>
+<p class="font-data-mono text-sm text-white">Match Winner</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-white/5 text-right">
+<p class="font-label-caps text-[10px] text-slate-500 mb-1">BEST CATEGORY</p>
+<p class="font-data-mono text-sm text-white">Player Stats</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Rivalries -->
+<section class="space-y-4">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-[0.2em]">Frequent Rivals</h3>
+<div class="bg-surface-container rounded-xl overflow-hidden border border-white/5">
+<div class="divide-y divide-white/5">
+<!-- Rival 1 -->
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-lg object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="profile photo of Rahul T. in a casual polo shirt, outdoor sunlight with greenery background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjc7GMoH34bB-8Tk6xFBKFx3opJnBXLkDRVhtSlh5Kbr1DL-1uevpwuDK47u52ojWqFBDYiYC2pa8D2igW_PHB9H4WeZ_EMQ7yCEM_FzPbiFIZAh342r0f_njPs7NdbuKHoZ0fg4Ya-vdNFntiMr5CrJGF4aTckHIjp3QSZcL_stZ88NYnulbD8fbey1mR4VAX86Z76AZDW-HnFvhMQWsNdNXIU9kUdeVL44j4JN9rbg9YFyKXcdU5Sx4R4oVqhG-gCd7eQTcprwD"/>
+<div>
+<p class="font-team-name text-sm text-white">Rahul T.</p>
+<p class="font-label-caps text-[10px] text-slate-500">Last played: Yesterday</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-primary text-sm">12W - 8L</p>
+<p class="font-label-caps text-[9px] text-tertiary">DOMINATING</p>
+</div>
+</div>
+<!-- Rival 2 -->
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-lg object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="profile photo of Sneha M., looking forward with a warm expression, modern professional office background in bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQhwIXFDFmR68cq0JOA6Wfba75oqfdGW5S3FGRD82Ib9XcX7xLmMlBz8fpU_IC83hIGj0C08ed1XfdmNdoqwhp9Z77ztXwTN3i_59bvm7zi-GbbUA09UZA-t5xZuZFR6ppxqsBTZUFaI9Ast-1jZlXXnJc-GnBX4HHmbwMAf7u-PHyVDthhgAR4YyoAmsGnY3BX91M-R4JNHJysuf27Sjo-8OD-ggRIBVSwpppZlamzuM57qKZ0z2P5y69sl5V91vdLGQovPAyJRgM"/>
+<div>
+<p class="font-team-name text-sm text-white">Sneha M.</p>
+<p class="font-label-caps text-[10px] text-slate-500">Last played: 3 days ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-white/60 text-sm">5W - 5L</p>
+<p class="font-label-caps text-[9px] text-slate-500">EVENLY MATCHED</p>
+</div>
+</div>
+<!-- Rival 3 -->
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-team-name text-sm text-white">Arjun K.</p>
+<p class="font-label-caps text-[10px] text-slate-500">Last played: 1 week ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-mono text-error text-sm">2W - 6L</p>
+<p class="font-label-caps text-[9px] text-error/60">UNDERDOG</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl border-t border-white/10 bg-slate-950/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<div class="flex justify-around items-center h-20 pb-safe px-2">
+<!-- Matches -->
+<button class="active:scale-110 transition-transform duration-200 flex flex-col items-center justify-center text-slate-500 hover:text-orange-300">
+<span class="material-symbols-outlined text-2xl" data-icon="sports_cricket">sports_cricket</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-wider">MATCHES</span>
+</button>
+<!-- H2H (Active) -->
+<button class="active:scale-110 transition-transform duration-200 flex flex-col items-center justify-center text-orange-500 brightness-125 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]">
+<span class="material-symbols-outlined text-2xl" data-icon="swords">swords</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-wider">H2H</span>
+</button>
+<!-- LIVE -->
+<button class="active:scale-110 transition-transform duration-200 flex flex-col items-center justify-center text-slate-500 hover:text-orange-300">
+<span class="material-symbols-outlined text-2xl" data-icon="sensors">sensors</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-wider">LIVE</span>
+</button>
+<!-- LEADERBOARD -->
+<button class="active:scale-110 transition-transform duration-200 flex flex-col items-center justify-center text-slate-500 hover:text-orange-300">
+<span class="material-symbols-outlined text-2xl" data-icon="leaderboard">leaderboard</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-wider">LEADERBOARD</span>
+</button>
+<!-- PROFILE -->
+<button class="active:scale-110 transition-transform duration-200 flex flex-col items-center justify-center text-slate-500 hover:text-orange-300">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-sans text-[10px] font-bold uppercase tracking-wider">PROFILE</span>
+</button>
+</div>
+</nav>
+</body></html>

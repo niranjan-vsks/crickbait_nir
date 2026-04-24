@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prediction Form - Crickbait</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&amp;family=Space+Grotesk:wght@700&amp;family=Lexend:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#9d4300",
+                        "on-error": "#690005",
+                        "background": "#0f131f",
+                        "secondary-fixed": "#ffdf9f",
+                        "inverse-on-surface": "#2c303d",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "tertiary-fixed": "#6bff8f",
+                        "on-primary": "#552100",
+                        "surface-dim": "#0f131f",
+                        "surface-container-highest": "#313442",
+                        "surface-container-low": "#171b28",
+                        "on-background": "#dfe2f3",
+                        "primary-container": "#f97316",
+                        "on-tertiary-container": "#003b16",
+                        "on-primary-container": "#582200",
+                        "tertiary": "#4ae176",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "primary-fixed-dim": "#ffb690",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-bright": "#353946",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "inverse-surface": "#dfe2f3",
+                        "surface-container-lowest": "#0a0e1a",
+                        "outline": "#a78b7d",
+                        "on-secondary-fixed": "#261a00",
+                        "on-secondary": "#402d00",
+                        "surface-variant": "#313442",
+                        "secondary-container": "#e3aa00",
+                        "surface-container-high": "#262a37",
+                        "on-tertiary": "#003915",
+                        "on-primary-fixed-variant": "#783200",
+                        "primary": "#ffb690",
+                        "surface-tint": "#ffb690",
+                        "on-primary-fixed": "#341100",
+                        "on-secondary-container": "#5a4100",
+                        "tertiary-container": "#00b251",
+                        "surface-container": "#1b1f2c",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#ffdbca",
+                        "outline-variant": "#584237",
+                        "secondary": "#ffc640",
+                        "error": "#ffb4ab",
+                        "on-surface": "#dfe2f3",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "surface": "#0f131f",
+                        "on-surface-variant": "#e0c0b1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "2rem",
+                        "md": "1rem",
+                        "margin-desktop": "2.5rem",
+                        "base": "4px",
+                        "gutter": "1rem",
+                        "xs": "0.25rem",
+                        "margin-mobile": "1rem",
+                        "lg": "1.5rem",
+                        "sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "body-main": ["Inter"],
+                        "display-header": ["Inter"],
+                        "team-name": ["Inter"],
+                        "data-mono": ["Space Grotesk"],
+                        "score-massive": ["Inter"],
+                        "label-caps": ["Lexend"]
+                    },
+                    "fontSize": {
+                        "body-main": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-header": ["24px", { "lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "900" }],
+                        "team-name": ["20px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "data-mono": ["14px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "score-massive": ["32px", { "lineHeight": "1", "fontWeight": "800" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-main text-body-main min-h-screen pb-24 md:pb-0 pt-16 md:pl-64">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-slate-950/80 backdrop-blur-xl shadow-lg shadow-black/50 docked full-width border-b border-white/10 md:hidden">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center overflow-hidden border border-outline">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="close up portrait of a young man with short hair wearing a dark shirt against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI1KYXbsnT3ty9cdDB6xtdfrgvE7Ppy5tu8Ousu5gmSi7SCNYMpYwh2jW-JEsKK2o__6J9cNTLEH1dGM9VrWiZpF5tSc5juykUCynd1LoMGfrKd3R7LdAwiM7Q-uA5AzEmqXW2LHC2Y8_cHbKT8-ZSp2iBCPxDxnFOm-dj_CrX4jvLNFLmk-KncZQDrsHdimIo7kowr-KbGh2YLHGAHOE6aDsEvi8ArZrdrJFgR-VnjV1D9aOhor4Zq_-OTZjK2FYfqyPpNU-T7yEJ"/>
+</div>
+<span class="text-2xl font-black italic tracking-tighter text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]">CRICKBAIT</span>
+</div>
+<button class="text-slate-400 hover:text-orange-400 transition-colors w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- NavigationDrawer -->
+<nav class="hidden lg:flex flex-col h-screen fixed left-0 top-0 z-40 bg-slate-900 h-full w-64 border-r border-white/10 shadow-2xl shadow-black divide-y divide-white/5 pt-16">
+<div class="p-6 flex flex-col items-start gap-4">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center overflow-hidden border-2 border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.4)]">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="close up portrait of a young man with short hair wearing a dark shirt against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoYTuh2FsQNZ1XDQsgtRAEhiIj_wIw49rNrqMDgr0x1Ga4puSOTfJxNm40FrwXyYW7ZuxJfQTnTI9S_AdfdKGK194yXOt_Z8wY5spTwRrDCt-7ewrjsFHhI0lO28Qpifr9d3ymRjemHIZSnkyz4apTyqW7bic8LnmZ2vgx7RzrUozjnt2-Ys6b-4PYa670mLbOVUeq6JCyGAZwPij_0h8WPJ1NAdlxrUXayd5X49nuBPfwQIuawhzeQCbeoUmELMVaTxhJTNDAw4uY"/>
+</div>
+<div>
+<h2 class="font-mono text-sm font-semibold text-orange-500 font-black tracking-tight">Admin Panel</h2>
+<p class="text-xs text-on-surface-variant font-mono">IPL Season 2024</p>
+<span class="inline-block mt-1 px-2 py-0.5 bg-surface-container-high text-on-surface text-[10px] rounded uppercase font-bold tracking-wider">Superuser</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-4 flex flex-col">
+<a class="text-slate-400 hover:bg-slate-800 px-4 py-3 transition-all flex items-center gap-3 font-mono text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 px-4 py-3 transition-all flex items-center gap-3 font-mono text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">sports_cricket</span>
+                Match Management
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 px-4 py-3 transition-all flex items-center gap-3 font-mono text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">group</span>
+                User Stats
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 px-4 py-3 transition-all flex items-center gap-3 font-mono text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Revenue
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 px-4 py-3 transition-all flex items-center gap-3 font-mono text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe px-2 bg-slate-950/90 backdrop-blur-2xl docked full-width rounded-t-2xl border-t border-white/10 shadow-[0_-10px_30px_rgba(0,0,0,0.8)] md:hidden">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.4)] p-2 rounded-lg scale-110 duration-200 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats" data-weight="fill" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1 text-orange-500">Predict</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Live</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Ranks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+<main class="max-w-4xl mx-auto p-4 md:p-6 lg:p-8 space-y-8">
+<!-- Header -->
+<div class="text-center space-y-2 mb-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full border border-surface-container-highest mb-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-on-surface">Locking in 45m</span>
+</div>
+<h1 class="font-display-header text-display-header text-on-surface">CSK vs MI</h1>
+<p class="font-data-mono text-data-mono text-on-surface-variant">Today, 19:30 IST • Wankhede Stadium</p>
+</div>
+<!-- SECTION A (Winner) -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-team-name text-team-name text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">trophy</span>
+                    Match Winner
+                </h2>
+<span class="font-data-mono text-data-mono text-primary-container">+50 pts</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Team 1 -->
+<button class="relative bg-surface-container-low border border-surface-container-highest rounded-xl p-6 text-center hover:bg-surface-container transition-colors group">
+<div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-t-xl opacity-50"></div>
+<img alt="CSK Logo" class="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-surface bg-surface shadow-lg" data-alt="yellow and dark blue abstract sports team logo featuring a roaring lion head" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5bYxO9-b44OCn2ixuT2hQjMTfNKrO2u_gOZyejYRMPjyyci_GQj4023h9SLPUM-KCCs8rMbkhA6A4Rd0KFHRflG3lzUo_F3JVdKfcPZOInvVGGG8RaIl6ZDw7kX_qxugH0lYWqyksdoPvCZQnbq8DnA3Vehvw47ehUM_VI5_7Sj0Dc4duCar3UUx8z1aH-VcTkenzXe7hhhfRpySZFvp8lAAzD6JhFKbUtnqhp1sWGT4_IXRCcqFdLUfu1iSljM9b1MwWXc1Uskva"/>
+<h3 class="font-team-name text-team-name text-on-surface mb-2">CSK</h3>
+<div class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors">Select</div>
+</button>
+<!-- Team 2 (Selected) -->
+<button class="relative bg-surface-container border-2 border-primary-container rounded-xl p-6 text-center shadow-[0_0_15px_rgba(249,115,22,0.15)]">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary-container font-label-caps text-[10px] px-2 py-1 rounded-full whitespace-nowrap shadow-md">
+                        Your team 🏏
+                    </div>
+<div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-blue-700 rounded-t-xl opacity-80"></div>
+<img alt="MI Logo" class="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-surface bg-surface shadow-lg" data-alt="blue and gold abstract sports team logo featuring a spinning hurricane graphic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIBvD-gLmPicMuk8p3Ej1GgIoUroJ2ZFLf0bLEmkZnTqIMGhEGm-3-9hZpb3FMaTyTxr9WcmeQB662I8MwIqHa1x3R5dIis3qnNuAwr-ISxFs03CRrYnQ7jw7jm6PbpoEQQ-EIMIHreH-UnvlSc858ZYa_Xe3QCCk7NxSh7cR-tDgBJ8QBUNx0iPvwI8GEkMEt95vkHmYfeu3HDBzdA-e6bZvbcfEa4KyxU6Oq7AJm1Tqup4S-UlA-tAawjjKu1nbl4OTGGUX0sv9F"/>
+<h3 class="font-team-name text-team-name text-on-surface mb-2">MI</h3>
+<div class="font-label-caps text-label-caps text-primary-container flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                        Selected
+                    </div>
+</button>
+</div>
+</section>
+<!-- SECTION B (POTM) -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-team-name text-team-name text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">star</span>
+                    Player of the Match
+                </h2>
+<span class="font-data-mono text-data-mono text-primary-container">+100 pts</span>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</div>
+<input class="w-full bg-surface-container border border-surface-container-highest rounded-lg pl-10 pr-4 py-3 text-on-surface font-body-main focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors placeholder:text-on-surface-variant" placeholder="Search players..." type="text"/>
+</div>
+</section>
+<!-- SECTION C (1st Innings Score) -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-team-name text-team-name text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">scoreboard</span>
+                    1st Innings Score
+                </h2>
+<span class="font-data-mono text-data-mono text-primary-container">+75 pts</span>
+</div>
+<div class="bg-surface-container-low border border-surface-container-highest rounded-xl p-6 text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-6">Historical Average: 168</p>
+<div class="flex items-center justify-center gap-6">
+<button class="w-12 h-12 rounded-full border border-surface-container-highest bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface">remove</span>
+</button>
+<input class="bg-transparent border-none text-center font-score-massive text-score-massive text-on-surface w-24 focus:ring-0 p-0" max="300" min="100" type="number" value="185"/>
+<button class="w-12 h-12 rounded-full border border-surface-container-highest bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface">add</span>
+</button>
+</div>
+<div class="mt-6 flex justify-between items-center px-4 max-w-xs mx-auto">
+<span class="font-data-mono text-xs text-on-surface-variant">140</span>
+<div class="flex-1 mx-4 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[60%]"></div>
+</div>
+<span class="font-data-mono text-xs text-on-surface-variant">220</span>
+</div>
+</div>
+</section>
+<!-- SECTION D (Player Stats) -->
+<section class="space-y-4 pb-20">
+<div class="flex items-center justify-between">
+<h2 class="font-team-name text-team-name text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">person_play</span>
+                    Player Milestones
+                </h2>
+</div>
+<div class="flex flex-wrap gap-2">
+<!-- Chip 1 -->
+<div class="inline-flex items-center gap-2 bg-surface-container border border-surface-container-highest rounded-full py-1.5 pl-2 pr-3">
+<img alt="Player" class="w-6 h-6 rounded-full object-cover" data-alt="headshot of smiling young man with dark hair in athletic wear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkrOnU1xLa_AD_YvsQz71jLAV2RlDZwMRFQIxq0FdY_tPXqZUne5JIKPoPCtFeUDl5-udupRIt65mQwBZ2lj6uAFkie2UG5qovm8qD8YAyJ0XupaIiPD8bC9jwK9MIHqk-bzEP0wDi8-OHmAkY3uwiVa5VivegAQo9ACTKnelZHGdaWyQQLnN4DPruvPTqOMk9TyfxShn5SMTIbz5mjwTedEKu6qWH04nWc1Yk1WTz5OCpoFCHqw0_a2e6-rdVtN8-kJWcmnEbYM2t"/>
+<span class="font-data-mono text-xs text-on-surface">MS Dhoni • 30+ Runs</span>
+<button class="text-on-surface-variant hover:text-error transition-colors ml-1">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Chip 2 -->
+<div class="inline-flex items-center gap-2 bg-surface-container border border-surface-container-highest rounded-full py-1.5 pl-2 pr-3">
+<img alt="Player" class="w-6 h-6 rounded-full object-cover" data-alt="headshot of serious looking man with stubble against plain background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZwbgVjMbmXSQOQE2U15FZuclWIo_P8c_V4LJhkRnII1TcE5ZWQCg_JRS0MJfveqBh6iIZ8JejrH6prpMrwo_Bd2ynpEqvFOGRTADcxzuCSmBQ_54-qO3soiBYRyCQwuLYz2gR2EPEqB79ZYCUPwAlBM0UkfqbN4_svejckXfFF_u-OW3Jf2U6qcNtJiB4zwlC7aF1-V5xqbABJp4rdMW_-NC-FwnR3rzisETftQpfo2LZIgSWy_Yv8TQbfX-y4DKy2Ctz6myKJRBj"/>
+<span class="font-data-mono text-xs text-on-surface">J Bumrah • 2+ Wickets</span>
+<button class="text-on-surface-variant hover:text-error transition-colors ml-1">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+<button class="w-full py-4 border-2 border-dashed border-surface-container-highest rounded-xl text-on-surface-variant hover:text-primary-container hover:border-primary-container transition-colors flex items-center justify-center gap-2 font-label-caps text-label-caps">
+<span class="material-symbols-outlined">add</span>
+                ADD PLAYER PREDICTION
+            </button>
+</section>
+</main>
+<!-- Sticky Bottom Bar -->
+<div class="fixed bottom-[4.5rem] md:bottom-0 left-0 md:left-64 right-0 bg-surface-container-highest/90 backdrop-blur-xl border-t border-surface-container-high p-4 z-40">
+<div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+<div class="hidden sm:block">
+<p class="font-data-mono text-data-mono text-on-surface">Total Potential</p>
+<p class="font-score-massive text-2xl text-primary-container">225 pts</p>
+</div>
+<button class="flex-1 sm:flex-none w-full sm:w-auto bg-primary-container text-on-primary-container font-label-caps text-label-caps py-3 px-8 rounded-lg shadow-[0_0_15px_rgba(249,115,22,0.3)] hover:bg-primary-fixed transition-colors active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">lock</span>
+                SAVE PREDICTIONS
+            </button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CRICKBAIT - Admin Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&amp;family=Space+Grotesk:wght@700&amp;family=Lexend:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#9d4300",
+                        "on-error": "#690005",
+                        "background": "#0f131f",
+                        "secondary-fixed": "#ffdf9f",
+                        "inverse-on-surface": "#2c303d",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "tertiary-fixed": "#6bff8f",
+                        "on-primary": "#552100",
+                        "surface-dim": "#0f131f",
+                        "surface-container-highest": "#313442",
+                        "surface-container-low": "#171b28",
+                        "on-background": "#dfe2f3",
+                        "primary-container": "#f97316",
+                        "on-tertiary-container": "#003b16",
+                        "on-primary-container": "#582200",
+                        "tertiary": "#4ae176",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "primary-fixed-dim": "#ffb690",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-bright": "#353946",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "inverse-surface": "#dfe2f3",
+                        "surface-container-lowest": "#0a0e1a",
+                        "outline": "#a78b7d",
+                        "on-secondary-fixed": "#261a00",
+                        "on-secondary": "#402d00",
+                        "surface-variant": "#313442",
+                        "secondary-container": "#e3aa00",
+                        "surface-container-high": "#262a37",
+                        "on-tertiary": "#003915",
+                        "on-primary-fixed-variant": "#783200",
+                        "primary": "#ffb690",
+                        "surface-tint": "#ffb690",
+                        "on-primary-fixed": "#341100",
+                        "on-secondary-container": "#5a4100",
+                        "tertiary-container": "#00b251",
+                        "surface-container": "#1b1f2c",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#ffdbca",
+                        "outline-variant": "#584237",
+                        "secondary": "#ffc640",
+                        "error": "#ffb4ab",
+                        "on-surface": "#dfe2f3",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "surface": "#0f131f",
+                        "on-surface-variant": "#e0c0b1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "2rem",
+                        "md": "1rem",
+                        "margin-desktop": "2.5rem",
+                        "base": "4px",
+                        "gutter": "1rem",
+                        "xs": "0.25rem",
+                        "margin-mobile": "1rem",
+                        "lg": "1.5rem",
+                        "sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "body-main": ["Inter"],
+                        "display-header": ["Inter"],
+                        "team-name": ["Inter"],
+                        "data-mono": ["Space Grotesk"],
+                        "score-massive": ["Inter"],
+                        "label-caps": ["Lexend"]
+                    },
+                    "fontSize": {
+                        "body-main": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-header": ["24px", { "lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "900" }],
+                        "team-name": ["20px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "data-mono": ["14px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "score-massive": ["32px", { "lineHeight": "1", "fontWeight": "800" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-main text-body-main min-h-screen lg:pl-64 md:pt-16 lg:pt-0 pt-0 pb-20 md:pb-0">
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/50">
+<div class="flex items-center gap-2">
+<img alt="User profile avatar with points badge" class="w-8 h-8 rounded-full border border-white/20" data-alt="Small round user profile avatar of a smiling man with a tiny gold points badge attached" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA8_OCLNFfbraODHJE8kHRiXI1yExdXVVj-qhdgSSt2oPY9PWvExEh3aOH0l4LrV3lPBm6G14AwD70b0yhrpQvLIKGO70PrWUY9yVIUCoz98jNAt7F-dYzdaFFJm5p5h2fd5BAEx133d6u707kwXIaYa1pTuS0jp3VusB5dL1_0yV5neozaDZVfw_bOvgKFBaOeNghGoHtVX2ZihyUL7P0Fy2Qg28pFIuGLXPMvzRBuo6AXWFktORXX3VlbmLE-PiH_Zx34WCGpBVo"/>
+</div>
+<div class="text-2xl font-black italic tracking-tighter text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)] font-display-header text-display-header uppercase">CRICKBAIT</div>
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+</header>
+<!-- TopAppBar (Tablet/Desktop) -->
+<header class="hidden md:flex lg:hidden fixed top-0 w-full z-50 justify-between items-center px-4 h-16 bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/50">
+<div class="text-2xl font-black italic tracking-tighter text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)] font-display-header text-display-header uppercase">CRICKBAIT</div>
+<div class="flex gap-6 items-center">
+<a class="text-slate-400 hover:text-orange-400 transition-colors font-sans font-bold tracking-tight text-sm uppercase" href="#">Dashboard</a>
+<a class="text-orange-500 font-sans font-bold tracking-tight text-sm uppercase" href="#">Match Management</a>
+<a class="text-slate-400 hover:text-orange-400 transition-colors font-sans font-bold tracking-tight text-sm uppercase" href="#">User Stats</a>
+<a class="text-slate-400 hover:text-orange-400 transition-colors font-sans font-bold tracking-tight text-sm uppercase" href="#">Revenue</a>
+<a class="text-slate-400 hover:text-orange-400 transition-colors font-sans font-bold tracking-tight text-sm uppercase" href="#">Settings</a>
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+<img alt="User profile avatar with points badge" class="w-8 h-8 rounded-full border border-white/20" data-alt="Small round user profile avatar of a smiling man with a tiny gold points badge attached" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBePVG7cIVjqIi3YIqHw0ZNS46jrWXzWyBGusLyhjN3RZZqWgTsb2oyB8DpvtA-Skjsa360dka7SCR7_gCMjEfmkRdQRVH2QlxV5iurvDlRNn8luxuSZBMlJk0Yn8MFxbShboJBkmlTMlJLYUyOcZD7ivdkXt4C20d6JrRcVa16f_7ttApJtVBHkFBHlxN9IVZZpuO9YgS69JdfiZXMtheVMFZ44dBnG39p2Mngpg36Jx7XUF55xgS4yATI1o0Whp52KDxE7pkRASqr"/>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop) -->
+<aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 z-40 bg-slate-900 w-64 border-r border-white/10 shadow-2xl shadow-black divide-y divide-white/5">
+<div class="p-6 flex items-center gap-4 border-b border-white/5">
+<img alt="Admin Avatar" class="w-12 h-12 rounded-full border-2 border-orange-500" data-alt="Professional headshot of a female administrator in a dark studio setting with subtle rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5-E4WZDpnh-FCphNkUzeFgdYm6eX71dp2j2GLicmTTmeax6dw99Y9o1gS4omqzZM35SBIWfgFhJF_VptKZinnCp9VQIHLZkWpb5PsDV2gmQ-SEVpFLOvuwrPTHNFITk2QvEN9P-2mK3p_U0nVgGvPGGe17ntvchRLnzWT2iJ6fLy3NR8sGYX0HtggG88liz3qeWKIqqsPnfOYp-kFTTGw8keTxTflPGf5lMmcQHR3_rNT8qZxCYdOj38IrAet7vbFXZM5avySLi6S"/>
+<div>
+<div class="text-orange-500 font-black font-display-header text-display-header text-lg">Admin Panel</div>
+<div class="text-slate-400 text-xs font-mono">IPL Season 2024</div>
+<div class="text-orange-500/80 text-[10px] font-bold uppercase tracking-wider mt-1 border border-orange-500/30 rounded px-1.5 py-0.5 inline-block">Superuser</div>
+</div>
+</div>
+<nav class="flex-1 py-4 flex flex-col font-mono text-sm font-semibold">
+<a class="text-slate-400 hover:bg-white/5 px-4 py-3 transition-all hover:bg-slate-800 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="bg-orange-500/10 text-orange-500 border-l-4 border-orange-500 px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_cricket</span>
+                Match Management
+            </a>
+<a class="text-slate-400 hover:bg-white/5 px-4 py-3 transition-all hover:bg-slate-800 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">group</span>
+                User Stats
+            </a>
+<a class="text-slate-400 hover:bg-white/5 px-4 py-3 transition-all hover:bg-slate-800 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Revenue
+            </a>
+<a class="text-slate-400 hover:bg-white/5 px-4 py-3 transition-all hover:bg-slate-800 flex items-center gap-3 mt-auto border-t border-white/5" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="p-margin-mobile md:p-margin-desktop space-y-xl max-w-7xl mx-auto pt-20 md:pt-24 lg:pt-8">
+<!-- Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-6">
+<div>
+<h1 class="font-display-header text-display-header text-on-surface">Match Management</h1>
+<p class="text-on-surface-variant font-body-main text-body-main text-sm mt-1">Manage fixtures, update results, and trigger scoring algorithms.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container font-body-main font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 hover:bg-orange-400 transition-colors shadow-[0_0_15px_rgba(249,115,22,0.4)] whitespace-nowrap self-start md:self-auto">
+<span class="material-symbols-outlined text-sm">add</span>
+                Create Match
+            </button>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-gutter">
+<!-- Left Column: Match List & Result Entry -->
+<div class="xl:col-span-2 space-y-gutter">
+<!-- Result Entry Card (Active) -->
+<div class="bg-surface-container-low border border-surface-container-highest rounded-xl p-6 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-container to-secondary-container"></div>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-team-name text-team-name text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">edit_document</span>
+                            Result Entry
+                        </h2>
+<span class="bg-tertiary-container/20 text-tertiary font-label-caps text-label-caps px-2 py-1 rounded border border-tertiary/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                            Live Select
+                        </span>
+</div>
+<div class="bg-surface rounded-lg border border-surface-variant p-4 mb-6">
+<div class="flex justify-between items-center mb-4">
+<div class="font-data-mono text-data-mono text-on-surface-variant text-xs">MATCH ID: #IPL24-042</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-xs">Today, 19:30 IST</div>
+</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-surface-variant">
+<span class="font-team-name text-team-name text-on-surface text-sm">MI</span>
+</div>
+<span class="font-team-name text-team-name text-on-surface hidden sm:inline">Mumbai Indians</span>
+</div>
+<div class="font-score-massive text-score-massive text-on-surface-variant text-xl opacity-50">VS</div>
+<div class="flex items-center gap-3">
+<span class="font-team-name text-team-name text-on-surface hidden sm:inline">Chennai Super Kings</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-surface-variant">
+<span class="font-team-name text-team-name text-on-surface text-sm">CSK</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Winner</label>
+<select class="w-full bg-surface border border-surface-variant text-on-surface font-body-main text-body-main rounded-lg focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors py-2 px-3">
+<option>Select Winner...</option>
+<option>Mumbai Indians</option>
+<option>Chennai Super Kings</option>
+<option>Tie</option>
+<option>No Result</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Player of the Match</label>
+<input class="w-full bg-surface border border-surface-variant text-on-surface font-body-main text-body-main rounded-lg focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors py-2 px-3 placeholder-on-surface-variant/50" placeholder="Enter player name" type="text"/>
+</div>
+</div>
+<button class="w-full bg-error-container text-on-error-container font-body-main font-bold py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-error-container/80 transition-colors border border-error/20 shadow-[0_0_15px_rgba(147,0,10,0.3)]">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                        Trigger Scoring
+                    </button>
+<p class="text-center font-label-caps text-label-caps text-on-surface-variant text-xs mt-3 opacity-70">Warning: This action distributes points and cannot be easily undone.</p>
+</div>
+<!-- Match List Table -->
+<div class="bg-surface-container-low border border-surface-container-highest rounded-xl overflow-hidden">
+<div class="p-4 border-b border-surface-variant flex justify-between items-center bg-surface-container/50">
+<h3 class="font-team-name text-team-name text-on-surface text-lg">Recent &amp; Upcoming Fixtures</h3>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer transition-colors">filter_list</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-surface-variant font-label-caps text-label-caps text-on-surface-variant text-xs">
+<th class="p-3 font-normal">Match</th>
+<th class="p-3 font-normal">Date/Time</th>
+<th class="p-3 font-normal">Status</th>
+<th class="p-3 font-normal text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono text-sm divide-y divide-surface-variant">
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-3 text-on-surface">RCB vs KKR</td>
+<td class="p-3 text-on-surface-variant">Tomorrow, 19:30</td>
+<td class="p-3">
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-[10px] uppercase tracking-wider border border-surface-container-highest">Pending</span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary-container hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-3 text-on-surface">DC vs RR</td>
+<td class="p-3 text-on-surface-variant">Yesterday</td>
+<td class="p-3">
+<span class="bg-tertiary-container/20 text-tertiary px-2 py-0.5 rounded text-[10px] uppercase tracking-wider border border-tertiary/20">Scored</span>
+</td>
+<td class="p-3 text-right">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors opacity-60">
+<td class="p-3 text-on-surface">GT vs LSG</td>
+<td class="p-3 text-on-surface-variant">12 May</td>
+<td class="p-3">
+<span class="bg-error-container/20 text-error px-2 py-0.5 rounded text-[10px] uppercase tracking-wider border border-error/20">Voided</span>
+</td>
+<td class="p-3 text-right">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: User Management & Scoring Log -->
+<div class="space-y-gutter">
+<!-- User Management Mini-Panel -->
+<div class="bg-surface-container-low border border-surface-container-highest rounded-xl overflow-hidden">
+<div class="p-4 border-b border-surface-variant bg-surface-container/50">
+<h3 class="font-team-name text-team-name text-on-surface text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">manage_accounts</span>
+                            User Roles
+                        </h3>
+</div>
+<div class="p-4 space-y-4">
+<!-- User Item -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-surface-variant" data-alt="Small round user profile avatar of a young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASYJM59chWuNvqenRphYzea7exnJHAdmO39UTFy5lIWFQYTQ9JNfqrspsHFx8YGxtdk4GZEeeuGGIVpbNXS0ka8Yr5zzPvzmrmb87Iy4r_zCTRB1hva4MDjy8ba9uMv9H6CuzQ_Zgxv4TyNej2-CytMaFmhRfk0he7SuKnvZ3kw6VR-zzZxzXirAIoI3MQJZRqzSkm_ZjCX7_SHn6Fnv2pT5WhZcFAPU1ndKAFUmGv6WkwGGg0CETCznHgIT7gxJGWOpODUQnnNiL-"/>
+<div>
+<div class="font-body-main text-body-main text-on-surface text-sm font-semibold">Rahul Sharma</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">rahul_s99</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-surface-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+<span class="ml-2 font-label-caps text-label-caps text-on-surface-variant text-[10px]">VIP</span>
+</label>
+</div>
+<!-- User Item -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-surface-variant" data-alt="Small round user profile avatar of a middle-aged man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuTJKAt2ar8PLBH2qBsldlS7pVF_ITjKPF7idFHS6WACkVmutc5rIbLGdBDJggXFb_-HSMbKPlkxKdkJR61xaBitm-t2CKhCAnksPxdEem7hNBGzdh2nDpTgfSy98SmRyPcVLLDC_MgpbJPFZ8m6_UYtOCGMHEIDkhh49ndPNobjzlBO-ScA75j4nIW-T5FeAM4kEbmKcYZobZYlExg5eKtkWZanVtdvtBzPjXGaNuFycrUMjO8a_lMV3IL-pO3pOkf-Pxxr9S1E6N"/>
+<div>
+<div class="font-body-main text-body-main text-on-surface text-sm font-semibold">Priya Patel</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant text-[10px]">priya_p</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-surface-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container shadow-[0_0_8px_rgba(249,115,22,0.3)]"></div>
+<span class="ml-2 font-label-caps text-label-caps text-primary-container text-[10px]">VIP</span>
+</label>
+</div>
+<button class="w-full mt-2 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps text-xs py-2 transition-colors border border-surface-variant border-dashed rounded">View All Users</button>
+</div>
+</div>
+<!-- Scoring Log (Terminal Style) -->
+<div class="bg-surface-container-low border border-surface-container-highest rounded-xl overflow-hidden h-64 flex flex-col">
+<div class="p-3 border-b border-surface-variant bg-surface-container/80 flex justify-between items-center">
+<h3 class="font-data-mono text-data-mono text-on-surface-variant text-xs flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            SYSTEM.LOG
+                        </h3>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px] cursor-pointer hover:text-on-surface">open_in_new</span>
+</div>
+<div class="p-4 bg-[#050810] flex-1 overflow-y-auto font-data-mono text-data-mono text-[11px] leading-relaxed space-y-1">
+<div class="text-on-surface-variant opacity-70">[14:32:01] System initializing... OK</div>
+<div class="text-tertiary-fixed-dim">[14:35:22] CRON: Auto-lock predictions for #IPL24-042</div>
+<div class="text-on-surface-variant opacity-70">[14:35:23] Locked 42,109 user predictions.</div>
+<div class="text-secondary">[15:10:05] ADMIN(Superuser) logged in.</div>
+<div class="text-on-surface-variant opacity-70">[15:12:44] Fetching live odds data... OK</div>
+<div class="text-tertiary-fixed-dim">[18:45:10] CRON: Payout calculated for #IPL24-041</div>
+<div class="text-primary-container">[18:45:12] SUCCESS: Distributed 1.2M points.</div>
+<div class="text-on-surface-variant flex items-center gap-1 animate-pulse mt-2">
+<span>_</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe px-2 bg-slate-950/90 backdrop-blur-2xl rounded-t-2xl border-t border-white/5 shadow-[0_-10px_30px_rgba(0,0,0,0.8)] pb-4">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Dash</span>
+</a>
+<a class="flex flex-col items-center justify-center text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.4)] scale-110 duration-200 ease-out p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">sports_cricket</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps text-orange-500">Match</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Users</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Rev</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 p-2 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Set</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,73 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid))
+             .data.isAdmin == true;
+    }
+
+    function isAuthed() {
+      return request.auth != null;
+    }
+
+    match /users/{uid} {
+      allow read: if isAuthed();
+      allow create: if request.auth.uid == uid;
+      allow update: if request.auth.uid == uid
+        && !request.resource.data.diff(resource.data)
+           .affectedKeys().hasAny(['favouriteTeam', 'isAdmin',
+           'totalPoints', 'matchesParticipated', 'accuracyByCategory'])
+        || isAdmin();
+    }
+
+    match /matches/{matchId} {
+      allow read: if isAuthed();
+      allow write: if isAdmin();
+    }
+
+    match /predictions/{docId} {
+      // own prediction always readable; others readable once match has played
+      allow read: if isAuthed() && (
+        request.auth.uid == resource.data.userId
+        || get(/databases/$(database)/documents/matches/$(resource.data.matchId))
+           .data.status in ['completed', 'live', 'dls', 'no_result', 'abandoned']
+      );
+      // create: only own prediction, match must still accept predictions
+      allow create: if request.auth.uid == request.resource.data.userId
+        && get(/databases/$(database)/documents/matches/$(request.resource.data.matchId))
+           .data.status in ['upcoming', 'live'];
+      // update: own predictions while match is open, OR admin scoring pass
+      allow update: if (
+          request.auth.uid == resource.data.userId
+          && request.resource.data.userId == resource.data.userId
+          && get(/databases/$(database)/documents/matches/$(resource.data.matchId))
+             .data.status in ['upcoming', 'live']
+        ) || isAdmin();
+    }
+
+    match /reactions/{matchId}/predictionReactions/{uid} {
+      allow read, write: if isAuthed();
+    }
+
+    match /leaderboard/{docId} {
+      allow read: if isAuthed();
+      allow write: if isAdmin();
+    }
+
+    match /h2h/{challengeId} {
+      allow read: if isAuthed() && (
+        request.auth.uid == resource.data.challengerId ||
+        request.auth.uid == resource.data.opponentId
+      );
+      allow create: if isAuthed();
+      allow update: if request.auth.uid == resource.data.opponentId
+                    && resource.data.status == 'pending';
+    }
+
+    match /config/{docId} {
+      allow read: if isAuthed();
+      allow write: if isAdmin();
+    }
+  }
+}
