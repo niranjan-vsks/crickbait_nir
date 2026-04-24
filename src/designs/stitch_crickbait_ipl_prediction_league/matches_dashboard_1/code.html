@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crickbait - Matches Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&amp;family=Lexend:wght@600&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#9d4300",
+                        "on-error": "#690005",
+                        "background": "#0f131f",
+                        "secondary-fixed": "#ffdf9f",
+                        "inverse-on-surface": "#2c303d",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "tertiary-fixed": "#6bff8f",
+                        "on-primary": "#552100",
+                        "surface-dim": "#0f131f",
+                        "surface-container-highest": "#313442",
+                        "surface-container-low": "#171b28",
+                        "on-background": "#dfe2f3",
+                        "primary-container": "#f97316",
+                        "on-tertiary-container": "#003b16",
+                        "on-primary-container": "#582200",
+                        "tertiary": "#4ae176",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "primary-fixed-dim": "#ffb690",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-bright": "#353946",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "inverse-surface": "#dfe2f3",
+                        "surface-container-lowest": "#0a0e1a",
+                        "outline": "#a78b7d",
+                        "on-secondary-fixed": "#261a00",
+                        "on-secondary": "#402d00",
+                        "surface-variant": "#313442",
+                        "secondary-container": "#e3aa00",
+                        "surface-container-high": "#262a37",
+                        "on-tertiary": "#003915",
+                        "on-primary-fixed-variant": "#783200",
+                        "primary": "#ffb690",
+                        "surface-tint": "#ffb690",
+                        "on-primary-fixed": "#341100",
+                        "on-secondary-container": "#5a4100",
+                        "tertiary-container": "#00b251",
+                        "surface-container": "#1b1f2c",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#ffdbca",
+                        "outline-variant": "#584237",
+                        "secondary": "#ffc640",
+                        "error": "#ffb4ab",
+                        "on-surface": "#dfe2f3",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "surface": "#0f131f",
+                        "on-surface-variant": "#e0c0b1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "2rem",
+                        "md": "1rem",
+                        "margin-desktop": "2.5rem",
+                        "base": "4px",
+                        "gutter": "1rem",
+                        "xs": "0.25rem",
+                        "margin-mobile": "1rem",
+                        "lg": "1.5rem",
+                        "sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "body-main": ["Inter"],
+                        "display-header": ["Inter"],
+                        "team-name": ["Inter"],
+                        "data-mono": ["Space Grotesk"],
+                        "score-massive": ["Inter"],
+                        "label-caps": ["Lexend"]
+                    },
+                    "fontSize": {
+                        "body-main": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-header": ["24px", { "lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "900" }],
+                        "team-name": ["20px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "data-mono": ["14px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "score-massive": ["32px", { "lineHeight": "1", "fontWeight": "800" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+        }
+        .live-glow {
+            box-shadow: 0 0 15px rgba(74, 225, 118, 0.4);
+        }
+        .pitch-line {
+            background-image: linear-gradient(to right, transparent, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.2) 80%, transparent);
+            height: 1px;
+            width: 100%;
+        }
+        /* Scrollbar hiding for tabs */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-main pb-24 antialiased min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/50">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-white/10">
+<img alt="User profile avatar with points badge" class="w-full h-full object-cover" data-alt="close-up portrait of a young male sports fan smiling slightly, clean lighting, dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQTJLU3z5JEIMwVJntRCygHF0jh_0cn1tbmfDaXBTlpAltenhfWVBbumGoGw7ZzmXQd7lioy7GEAZVzU0dNm1ZTPE-bNg0qFI4PO8hp6o_r566rauGGIkLrHe3oSV2XAgYOTpp1nthvyzYGvbioiwVI4aUEKrSX-UF3gUIFQ0VCmCzxhTyYxQgzq7n64PW29AUuAy1pfurdvzcJW1RJbibIVCkAiXtB0bjMg2MQipI31u4ekHw8cC1XGb5oxAbvmVSHQGAaj2cMZmn"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary-container text-on-primary-container font-data-mono text-data-mono text-[10px] px-1.5 py-0.5 rounded-DEFAULT shadow-sm border border-background">142 pts</div>
+</div>
+<h1 class="text-2xl font-black italic tracking-tighter text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)] uppercase">CRICKBAIT</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors text-slate-400 hover:text-orange-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</header>
+<main class="pt-20 px-margin-mobile flex flex-col gap-gutter max-w-2xl mx-auto">
+<!-- Tabs -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar py-2 border-b border-white/5 mb-2">
+<button class="px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-label-caps text-label-caps shadow-[0_0_10px_rgba(249,115,22,0.3)] whitespace-nowrap">UPCOMING</button>
+<button class="px-6 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-caps text-label-caps border border-white/5 hover:bg-white/5 transition-colors whitespace-nowrap">LIVE</button>
+<button class="px-6 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-caps text-label-caps border border-white/5 hover:bg-white/5 transition-colors whitespace-nowrap">COMPLETED</button>
+</div>
+<!-- Live Match Card (Hero) -->
+<article class="bg-surface-container-low border border-surface-container-highest rounded-xl overflow-hidden shadow-xl shadow-black/40 relative">
+<div class="absolute inset-0 bg-gradient-to-b from-primary-container/10 to-transparent pointer-events-none"></div>
+<div class="p-md relative z-10 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-data-mono text-on-surface-variant">Match 34</span>
+<span class="text-on-surface-variant/50 text-xs">•</span>
+<span class="font-body-main text-body-main text-sm text-on-surface-variant">Wankhede, Mumbai</span>
+</div>
+<div class="flex items-center gap-1 bg-tertiary/10 text-tertiary px-2 py-1 rounded-sm border border-tertiary/20 live-glow">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="font-label-caps text-label-caps text-[10px]">LIVE</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border-2 border-[#004BA0] flex items-center justify-center p-2 shadow-lg">
+<img alt="MI Logo" class="w-full h-full object-contain rounded-full mix-blend-screen" data-alt="abstract dynamic blue and gold sports team logo emblem on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_UPj5tz1_fP1TlfnyvCAq9yBnctLfNzP8kPRyx0-8eXIpr-bxtIX_8GsfuL70g_VHDWqL3d5NXHAxcR84gsL-Wsf_yOwV7c4ftW1ZxMcsVosktsggI1C-pnBzFRlBrgI665Inf-8c6ODwlmklid7QzRFf2DcvNS9sFtZpwDuFWIselcu_68QWpoltQL_0rNsLE1W78ZTCvpwBB7GGeIYQL7W6MR7wKadm2x32Ntyw_GumRN6xkWinM_jB9sU1sjKCs3wXDbA15PW"/>
+</div>
+<span class="font-team-name text-team-name text-on-surface">MI</span>
+<div class="font-score-massive text-score-massive text-on-surface mt-1">168/4</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant text-xs">15.2 Ov</div>
+</div>
+<div class="flex flex-col items-center justify-center px-4">
+<span class="font-display-header text-display-header text-on-surface-variant/30 italic">VS</span>
+<span class="font-data-mono text-data-mono text-primary mt-2">Target: 215</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border-2 border-[#FFFF3C] flex items-center justify-center p-2 shadow-lg">
+<img alt="CSK Logo" class="w-full h-full object-contain rounded-full mix-blend-screen" data-alt="abstract dynamic yellow roaring lion sports team logo emblem on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwBHbJ88pbQHzLPNYNvPypjwe43GgX-7_GhSg03y5gjkcMng7XXc6OEDe482Ahlt7AcUPknC5F85hgQPWsEYlU5lbowrbYqhS7yhWaMoQg7LaWbQPQ8NgqSQ68smDFnkXLm4gIWCDwAgnuCUSwX6ntf8UJDyiQcBa3-6nQ5S6K2GmQz2ihLC7ojwp5SW0BF50mlNqPw4hhf9mbJdpYCVv1157VcJtp-D8BC0LIlSb4V_ngeIFGWvdnwWyjd-KkhnZQhqUTqKtw9-MT"/>
+</div>
+<span class="font-team-name text-team-name text-on-surface">CSK</span>
+<div class="font-score-massive text-score-massive text-on-surface/50 mt-1">214/6</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant text-xs">20.0 Ov</div>
+</div>
+</div>
+<div class="pitch-line my-1"></div>
+<div class="flex justify-between items-center bg-surface-container p-3 rounded-lg border border-white/5">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant mb-1">WIN PROBABILITY</span>
+<div class="w-32 h-1.5 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-[#004BA0]" style="width: 35%"></div>
+<div class="h-full bg-[#FFFF3C]" style="width: 65%"></div>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label-caps text-label-caps px-4 py-2 rounded-lg neon-glow flex items-center gap-1 hover:bg-orange-400 transition-colors">
+                        IN-PLAY PREDICT
+                        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Upcoming Match Card -->
+<article class="bg-surface-container-low border border-surface-container-highest rounded-xl overflow-hidden shadow-lg shadow-black/20">
+<div class="p-md flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-data-mono text-on-surface-variant">Match 35</span>
+<span class="text-on-surface-variant/50 text-xs">•</span>
+<span class="font-body-main text-body-main text-sm text-on-surface-variant">Eden Gardens, Kolkata</span>
+</div>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span class="font-data-mono text-data-mono text-sm text-secondary">04:20:15</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-3 flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-[#3A225D] flex items-center justify-center p-1">
+<span class="font-team-name text-team-name text-xs text-[#3A225D]">KKR</span>
+</div>
+<span class="font-team-name text-team-name text-base text-on-surface">KKR</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant/30 text-xs px-2">VS</span>
+<div class="flex items-center gap-3 flex-1 justify-end">
+<span class="font-team-name text-team-name text-base text-on-surface">RCB</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-[#EC1C24] flex items-center justify-center p-1">
+<span class="font-team-name text-team-name text-xs text-[#EC1C24]">RCB</span>
+</div>
+</div>
+</div>
+<div class="pitch-line my-1"></div>
+<div class="flex justify-between items-center bg-surface-container/50 p-2 rounded-lg border border-white/5">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full border border-primary-container flex items-center justify-center text-primary-container">
+<span class="font-data-mono text-data-mono text-[10px]">3/5</span>
+</div>
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">PREDICTIONS MADE</span>
+</div>
+<button class="text-primary font-label-caps text-label-caps text-[12px] flex items-center gap-1 hover:text-primary-container transition-colors">
+                        PREDICT <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Locked/Upcoming Match Card -->
+<article class="bg-surface-container-low border border-surface-container-highest rounded-xl overflow-hidden shadow-lg shadow-black/20 opacity-80">
+<div class="p-md flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-data-mono text-on-surface-variant">Match 36</span>
+<span class="text-on-surface-variant/50 text-xs">•</span>
+<span class="font-body-main text-body-main text-sm text-on-surface-variant">Arun Jaitley, Delhi</span>
+</div>
+<div class="flex items-center gap-1 text-error bg-error-container/20 px-2 py-0.5 rounded-sm border border-error/20">
+<span class="font-label-caps text-label-caps text-[10px]">LOCKED</span>
+<span class="material-symbols-outlined text-[12px]">lock</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-3 flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-[#0000FF] flex items-center justify-center p-1">
+<span class="font-team-name text-team-name text-xs text-[#0000FF]">DC</span>
+</div>
+<span class="font-team-name text-team-name text-base text-on-surface">DC</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant/30 text-xs px-2">VS</span>
+<div class="flex items-center gap-3 flex-1 justify-end">
+<span class="font-team-name text-team-name text-base text-on-surface">SRH</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-[#F26522] flex items-center justify-center p-1">
+<span class="font-team-name text-team-name text-xs text-[#F26522]">SRH</span>
+</div>
+</div>
+</div>
+<div class="pitch-line my-1"></div>
+<div class="flex justify-between items-center bg-surface-container/30 p-2 rounded-lg border border-white/5">
+<div class="flex items-center gap-2 opacity-50">
+<div class="w-6 h-6 rounded-full border border-on-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="font-data-mono text-data-mono text-[10px]">5/5</span>
+</div>
+<span class="font-label-caps text-label-caps text-[10px] text-on-surface-variant">PREDICTIONS LOCKED</span>
+</div>
+<button class="text-on-surface-variant font-label-caps text-label-caps text-[12px] flex items-center gap-1 opacity-50 cursor-not-allowed">
+                        VIEW <span class="material-symbols-outlined text-[14px]">visibility</span>
+</button>
+</div>
+</div>
+</article>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe px-2 bg-slate-950/90 backdrop-blur-2xl rounded-t-2xl border-t border-white/10 shadow-[0_-10px_30px_rgba(0,0,0,0.8)] pb-4 md:hidden">
+<a class="flex flex-col items-center justify-center text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.4)] hover:bg-white/5 w-16 h-14 rounded-lg transition-all scale-110 duration-200 ease-out" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 w-16 h-14 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" style="font-variation-settings: 'FILL' 0;">query_stats</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Predict</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 w-16 h-14 rounded-lg transition-colors relative" href="#">
+<span class="material-symbols-outlined text-2xl mb-1 text-tertiary" style="font-variation-settings: 'FILL' 0;">sensors</span>
+<div class="absolute top-2 right-4 w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Live</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 w-16 h-14 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" style="font-variation-settings: 'FILL' 0;">leaderboard</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Ranks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-white/5 w-16 h-14 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+</body></html>
