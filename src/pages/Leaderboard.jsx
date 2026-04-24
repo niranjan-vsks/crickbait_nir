@@ -160,7 +160,7 @@ export default function Leaderboard() {
             Leaderboard
           </h1>
         </div>
-        <p className="text-xs text-[#6B7280] mb-4">IPL Season 2024</p>
+        <p className="text-xs text-[#6B7280] mb-4">IPL Season {new Date().getFullYear()}</p>
 
         {showOwnRankChip && (
           <div className="flex justify-center mb-4">

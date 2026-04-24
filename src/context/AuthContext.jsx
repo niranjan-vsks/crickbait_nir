@@ -28,10 +28,17 @@ export function AuthProvider({ children }) {
 
       if (firebaseUser) {
         const userRef = doc(db, 'users', firebaseUser.uid);
-        unsubFirestore = onSnapshot(userRef, (snap) => {
-          setFirestoreUser(snap.exists() ? { id: snap.id, ...snap.data() } : null);
-          setLoading(false);
-        });
+        unsubFirestore = onSnapshot(
+          userRef,
+          (snap) => {
+            setFirestoreUser(snap.exists() ? { id: snap.id, ...snap.data() } : null);
+            setLoading(false);
+          },
+          () => {
+            // Firestore unavailable (offline with no cache) — unblock the app
+            setLoading(false);
+          }
+        );
       } else {
         setFirestoreUser(null);
         setLoading(false);

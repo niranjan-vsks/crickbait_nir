@@ -26,15 +26,24 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    match /predictions/{matchId}/userPredictions/{uid} {
+    match /predictions/{docId} {
+      // own prediction always readable; others readable once match has played
       allow read: if isAuthed() && (
-        request.auth.uid == uid ||
-        get(/databases/$(database)/documents/matches/$(matchId))
-          .data.status in ['completed','live','dls','no_result','abandoned']
+        request.auth.uid == resource.data.userId
+        || get(/databases/$(database)/documents/matches/$(resource.data.matchId))
+           .data.status in ['completed', 'live', 'dls', 'no_result', 'abandoned']
       );
-      allow create, update: if request.auth.uid == uid
-        && get(/databases/$(database)/documents/matches/$(matchId))
-           .data.status in ['upcoming','live'];
+      // create: only own prediction, match must still accept predictions
+      allow create: if request.auth.uid == request.resource.data.userId
+        && get(/databases/$(database)/documents/matches/$(request.resource.data.matchId))
+           .data.status in ['upcoming', 'live'];
+      // update: own predictions while match is open, OR admin scoring pass
+      allow update: if (
+          request.auth.uid == resource.data.userId
+          && request.resource.data.userId == resource.data.userId
+          && get(/databases/$(database)/documents/matches/$(resource.data.matchId))
+             .data.status in ['upcoming', 'live']
+        ) || isAdmin();
     }
 
     match /reactions/{matchId}/predictionReactions/{uid} {

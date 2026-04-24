@@ -6,26 +6,34 @@ import {
   getDoc,
   doc,
   writeBatch,
-  updateDoc,
+  runTransaction,
   serverTimestamp,
+  increment,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { computePoints } from './scoringEngine';
 
-const BATCH_SIZE = 400;
+// 250 users × 2 batch ops each = 500 — exactly at Firestore's hard limit
+const BATCH_SIZE = 250;
 
 export async function triggerScoring(match) {
+  const matchRef = doc(db, 'matches', match.id);
+
+  // Atomically claim scoring — prevents concurrent double-runs
+  let claimed = false;
+  await runTransaction(db, async (txn) => {
+    const snap = await txn.get(matchRef);
+    if (snap.data()?.scored) return;
+    txn.update(matchRef, { scored: true, scoredAt: serverTimestamp() });
+    claimed = true;
+  });
+  if (!claimed) return 0;
+
   const predictionsRef = collection(db, 'predictions');
   const q = query(predictionsRef, where('matchId', '==', match.id));
   const snap = await getDocs(q);
 
-  if (snap.empty) {
-    await updateDoc(doc(db, 'matches', match.id), {
-      scored: true,
-      scoredAt: serverTimestamp(),
-    });
-    return 0;
-  }
+  if (snap.empty) return 0;
 
   const docs = snap.docs;
   const chunks = [];
@@ -43,7 +51,6 @@ export async function triggerScoring(match) {
       const userRef = doc(db, 'users', predData.userId);
       const userSnap = await getDoc(userRef);
       const favTeam = userSnap.exists() ? userSnap.data().favouriteTeam : null;
-      const existingPts = userSnap.exists() ? (userSnap.data().totalPoints ?? 0) : 0;
 
       const breakdown = computePoints(predData, match.result, favTeam, match);
       if (!breakdown) continue;
@@ -54,8 +61,10 @@ export async function triggerScoring(match) {
         scored: true,
       });
 
+      // increment() is concurrent-safe — no stale read + write race
       batch.update(userRef, {
-        totalPoints: existingPts + breakdown.total,
+        totalPoints: increment(breakdown.total),
+        matchesParticipated: increment(1),
       });
 
       count++;
@@ -63,11 +72,6 @@ export async function triggerScoring(match) {
 
     await batch.commit();
   }
-
-  await updateDoc(doc(db, 'matches', match.id), {
-    scored: true,
-    scoredAt: serverTimestamp(),
-  });
 
   return count;
 }

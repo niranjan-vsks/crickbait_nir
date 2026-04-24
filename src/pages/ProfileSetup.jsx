@@ -29,26 +29,30 @@ export default function ProfileSetup() {
     setSubmitting(true);
     setError('');
     try {
-      await setDoc(doc(db, 'users', user.uid), {
+      const isFirstTime = !firestoreUser;
+      const payload = {
         uid: user.uid,
         email: user.email,
         photoURL: user.photoURL || null,
         displayName: displayName.trim(),
         favouriteTeam: selectedTeam,
-        isAdmin: false,
-        totalPoints: 0,
-        matchesParticipated: 0,
-        accuracyByCategory: {
+        fcmToken: null,
+        profileComplete: true,
+        createdAt: serverTimestamp(),
+      };
+      if (isFirstTime) {
+        payload.isAdmin = false;
+        payload.totalPoints = 0;
+        payload.matchesParticipated = 0;
+        payload.accuracyByCategory = {
           winner:  { correct: 0, total: 0 },
           potm:    { correct: 0, total: 0 },
           innings: { correct: 0, total: 0 },
           runs:    { correct: 0, total: 0 },
           wickets: { correct: 0, total: 0 },
-        },
-        fcmToken: null,
-        profileComplete: true,
-        createdAt: serverTimestamp(),
-      });
+        };
+      }
+      await setDoc(doc(db, 'users', user.uid), payload, { merge: true });
       navigate('/home', { replace: true });
     } catch (err) {
       setError('Failed to save profile. Please try again.');

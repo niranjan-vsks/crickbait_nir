@@ -34,7 +34,7 @@ function LiveScoreTicker({ match, onPredict }) {
       <div className="flex items-center justify-between mb-3">
         <div className="flex flex-col items-start">
           <span className="text-2xl font-black font-mono text-[#dfe2f3]">
-            {match.score1 || '—'}
+            {match.score1 != null ? match.score1 : '—'}
           </span>
           {match.overs1 && (
             <span className="text-[10px] text-[#6B7280]">{match.overs1} ov</span>
@@ -51,7 +51,7 @@ function LiveScoreTicker({ match, onPredict }) {
 
         <div className="flex flex-col items-end">
           <span className="text-2xl font-black font-mono text-[#dfe2f3]">
-            {match.score2 || '—'}
+            {match.score2 != null ? match.score2 : '—'}
           </span>
           {match.overs2 && (
             <span className="text-[10px] text-[#6B7280]">{match.overs2} ov</span>

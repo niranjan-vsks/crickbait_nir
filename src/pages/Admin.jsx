@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { collection, addDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import AppShell from '../components/layout/AppShell';
 import { useToast } from '../components/ui/Toast';
@@ -162,22 +162,13 @@ function ResultEntryTab({ match, setActiveTab }) {
   async function handleTrigger() {
     setTriggering(true);
     try {
-      const matchWithResult = {
-        ...match,
-        status,
-        isDLS,
-        result: {
-          winner: winner || null,
-          potm: potm.trim() || null,
-          firstInningsScore: innings !== '' ? Number(innings) : null,
-          playerStats: Object.fromEntries(
-            playerRows
-              .filter((r) => r.name.trim())
-              .map((r) => [r.name.trim(), { runs: Number(r.runs) || 0, wickets: Number(r.wickets) || 0 }])
-          ),
-        },
-      };
-      const count = await triggerScoring(matchWithResult);
+      // Re-fetch from Firestore so scoring uses the saved result, not form state
+      const freshSnap = await getDoc(doc(db, 'matches', match.id));
+      if (!freshSnap.exists()) {
+        show('Match not found', 'error');
+        return;
+      }
+      const count = await triggerScoring({ id: freshSnap.id, ...freshSnap.data() });
       show(`Scoring complete — ${count} prediction(s) scored`, 'success');
     } catch (err) {
       show('Scoring failed: ' + err.message, 'error');
@@ -276,7 +267,7 @@ function ResultEntryTab({ match, setActiveTab }) {
           </div>
           <div className="space-y-2">
             {playerRows.map((row, i) => (
-              <div key={i} className="flex gap-2 items-center">
+              <div key={`${row.name}_${i}`} className="flex gap-2 items-center">
                 <input
                   type="text"
                   value={row.name}

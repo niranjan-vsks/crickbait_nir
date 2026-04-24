@@ -33,8 +33,8 @@ export default function Predict() {
 
   async function handleSave() {
     if (!match) return;
-    await savePrediction(match);
-    if (!error) show('Predictions saved!', 'success');
+    const err = await savePrediction(match);
+    if (!err) show('Predictions saved!', 'success');
     else show('Failed to save. Try again.', 'error');
   }
 

@@ -70,8 +70,10 @@ export function usePrediction(matchId) {
     try {
       await setDoc(doc(db, 'predictions', docId), payload, { merge: true });
       setSaved(true);
+      return null;
     } catch (e) {
       setError(e.message);
+      return e.message;
     } finally {
       setSaving(false);
     }

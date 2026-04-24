@@ -57,7 +57,6 @@ export default function Profile() {
   const { user, firestoreUser, signOut } = useAuth();
   const navigate = useNavigate();
   const [predictions, setPredictions] = useState([]);
-  const [predCount, setPredCount] = useState(null);
   const [loadingPreds, setLoadingPreds] = useState(true);
 
   useEffect(() => {
@@ -73,18 +72,9 @@ export default function Profile() {
           limit(10)
         );
         const snap = await getDocs(q);
-        const docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-        setPredictions(docs);
-
-        const countQ = query(
-          collection(db, 'predictions'),
-          where('userId', '==', user.uid)
-        );
-        const countSnap = await getDocs(countQ);
-        setPredCount(countSnap.size);
+        setPredictions(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
       } catch {
         setPredictions([]);
-        setPredCount(0);
       } finally {
         setLoadingPreds(false);
       }
@@ -149,7 +139,7 @@ export default function Profile() {
         <div className="flex gap-3">
           <StatCard label="Points" value={firestoreUser?.totalPoints ?? 0} />
           <StatCard label="Rank" value="—" />
-          <StatCard label="Predictions" value={predCount ?? '—'} />
+          <StatCard label="Predictions" value={firestoreUser?.matchesParticipated ?? 0} />
         </div>
 
         <div className="space-y-3">
